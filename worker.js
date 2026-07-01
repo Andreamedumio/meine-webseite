@@ -9,9 +9,7 @@ function isValidEmail(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 }
 
-export async function onRequestPost(context) {
-  const { request, env } = context;
-
+async function handleLead(request, env) {
   let data;
   try {
     data = await request.json();
@@ -44,3 +42,15 @@ export async function onRequestPost(context) {
 
   return jsonResponse({ success: true });
 }
+
+export default {
+  async fetch(request, env) {
+    const url = new URL(request.url);
+
+    if (url.pathname === "/api/lead" && request.method === "POST") {
+      return handleLead(request, env);
+    }
+
+    return env.ASSETS.fetch(request);
+  },
+};
