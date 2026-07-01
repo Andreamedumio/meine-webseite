@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Matcha Momente – Japanische Matcha Rezepte</title>
+<style>
+  :root {
+    --matcha-dark: #2f4a3c;
+    --matcha: #6a9955;
+    --matcha-light: #a9c99a;
+    --matcha-pale: #eef4e8;
+    --cream: #fbf9f2;
+    --text: #2c2c28;
+    --text-muted: #6b6b62;
+    --accent: #c98a3b;
+    --radius: 16px;
+    --shadow: 0 10px 30px rgba(47, 74, 60, 0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Helvetica Neue', Arial, sans-serif;
+    color: var(--text);
+    background: var(--cream);
+    line-height: 1.6;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Header */
+  header {
+    position: sticky;
+    top: 0;
+    background: rgba(251, 249, 242, 0.9);
+    backdrop-filter: blur(8px);
+    z-index: 100;
+    border-bottom: 1px solid rgba(47, 74, 60, 0.08);
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 0;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--matcha-dark);
+  }
+
+  .logo-dot {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background: var(--matcha);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--matcha-dark); }
+
+  .btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border-radius: 999px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  .btn-primary {
+    background: var(--matcha-dark);
+    color: #fff;
+  }
+
+  .btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(47, 74, 60, 0.3);
+  }
+
+  .btn-small {
+    padding: 8px 18px;
+    font-size: 0.9rem;
+  }
+
+  /* Hero */
+  .hero {
+    padding: 90px 0 70px;
+    background: radial-gradient(circle at top right, var(--matcha-pale), var(--cream) 60%);
+  }
+
+  .hero-inner {
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    background: var(--matcha-pale);
+    color: var(--matcha-dark);
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+  }
+
+  h1 {
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
+    color: var(--matcha-dark);
+    line-height: 1.15;
+    margin-bottom: 20px;
+  }
+
+  .hero p.lead {
+    font-size: 1.15rem;
+    color: var(--text-muted);
+    margin-bottom: 32px;
+    max-width: 480px;
+  }
+
+  .hero-cta { display: flex; gap: 16px; flex-wrap: wrap; }
+
+  .hero-visual {
+    background: linear-gradient(160deg, var(--matcha) 0%, var(--matcha-dark) 100%);
+    border-radius: 28px;
+    aspect-ratio: 1 / 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-visual::before {
+    content: "抹茶";
+    font-size: 6rem;
+    color: rgba(255,255,255,0.15);
+    position: absolute;
+    font-weight: 700;
+  }
+
+  .bowl {
+    width: 55%;
+    aspect-ratio: 1;
+    background: var(--matcha-light);
+    border-radius: 50%;
+    box-shadow: inset 0 10px 20px rgba(0,0,0,0.15), 0 15px 25px rgba(0,0,0,0.2);
+    position: relative;
+    z-index: 1;
+  }
+
+  .bowl::after {
+    content: "";
+    position: absolute;
+    inset: 12%;
+    background: radial-gradient(circle at 35% 30%, #d7e8c9, var(--matcha) 70%);
+    border-radius: 50%;
+  }
+
+  /* Sections */
+  section { padding: 80px 0; }
+
+  .section-title {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 50px;
+  }
+
+  .section-title .eyebrow { display: inline-block; }
+
+  .section-title h2 {
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    color: var(--matcha-dark);
+    margin-bottom: 12px;
+  }
+
+  .section-title p { color: var(--text-muted); }
+
+  /* Benefits */
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .benefit-card {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 32px 24px;
+    box-shadow: var(--shadow);
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+
+  .benefit-card:hover { transform: translateY(-6px); }
+
+  .benefit-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--matcha-pale);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    margin: 0 auto 18px;
+  }
+
+  .benefit-card h3 {
+    color: var(--matcha-dark);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+  }
+
+  .benefit-card p { color: var(--text-muted); font-size: 0.95rem; }
+
+  /* Recipes */
+  .recipes { background: var(--matcha-pale); }
+
+  .recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+  }
+
+  .recipe-card {
+    background: var(--cream);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow);
+  }
+
+  .recipe-thumb {
+    height: 150px;
+    background: linear-gradient(135deg, var(--matcha-light), var(--matcha));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+  }
+
+  .recipe-body { padding: 22px; }
+
+  .recipe-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .recipe-body h3 { color: var(--matcha-dark); margin-bottom: 8px; font-size: 1.15rem; }
+  .recipe-body p { color: var(--text-muted); font-size: 0.92rem; }
+
+  /* Lead form */
+  .lead-section {
+    background: var(--matcha-dark);
+    color: #fff;
+  }
+
+  .lead-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .lead-inner h2 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin-bottom: 16px; }
+  .lead-inner p { color: rgba(255,255,255,0.8); margin-bottom: 8px; }
+
+  .lead-form {
+    background: #fff;
+    border-radius: var(--radius);
+    padding: 36px;
+    box-shadow: var(--shadow);
+    color: var(--text);
+  }
+
+  .form-group { margin-bottom: 18px; }
+
+  .form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--matcha-dark);
+  }
+
+  .form-group input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid #d8dfd3;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.2s;
+  }
+
+  .form-group input:focus {
+    outline: none;
+    border-color: var(--matcha);
+  }
+
+  .lead-form .btn-primary {
+    width: 100%;
+    margin-top: 6px;
+  }
+
+  .lead-form .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+  }
+
+  .form-note {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 14px;
+    text-align: center;
+  }
+
+  .form-message {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    display: none;
+  }
+
+  .form-message.success {
+    display: block;
+    background: #e5f3df;
+    color: var(--matcha-dark);
+  }
+
+  .form-message.error {
+    display: block;
+    background: #fbe4e0;
+    color: #93382a;
+  }
+
+  /* Footer */
+  footer {
+    padding: 40px 0;
+    text-align: center;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+  }
+
+  footer .logo { justify-content: center; margin-bottom: 12px; }
+
+  @media (max-width: 860px) {
+    .hero-inner, .lead-inner { grid-template-columns: 1fr; }
+    .hero-visual { order: -1; max-width: 320px; margin: 0 auto; }
+    .benefits-grid, .recipes-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container nav">
+    <div class="logo"><span class="logo-dot"></span> Matcha Momente</div>
+    <ul class="nav-links">
+      <li><a href="#rezepte">Rezepte</a></li>
+      <li><a href="#vorteile">Warum Matcha</a></li>
+      <li><a href="#anmelden">Anmelden</a></li>
+    </ul>
+    <a href="#anmelden" class="btn btn-primary btn-small">Kostenlos starten</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container hero-inner">
+    <div>
+      <span class="eyebrow">Japanische Teekultur</span>
+      <h1>Matcha Rezepte, die dein Zuhause in ein Kyoto-Teehaus verwandeln</h1>
+      <p class="lead">
+        Von klassischem Usucha bis zu modernen Matcha-Lattes und Desserts –
+        entdecke authentische japanische Matcha-Rezepte, Schritt für Schritt erklärt.
+      </p>
+      <div class="hero-cta">
+        <a href="#anmelden" class="btn btn-primary">Rezepte kostenlos erhalten</a>
+        <a href="#rezepte" class="btn" style="border:1.5px solid var(--matcha-dark); color:var(--matcha-dark);">Rezepte ansehen</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="bowl"></div>
+    </div>
+  </div>
+</section>
+
+<section id="vorteile">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">Warum Matcha</span>
+      <h2>Mehr als nur ein grünes Getränk</h2>
+      <p>Matcha vereint Ritual, Genuss und Wohlbefinden – handverlesen aus Uji, Japan.</p>
+    </div>
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="benefit-icon">🍵</div>
+        <h3>Traditionelle Zeremonie</h3>
+        <p>Lerne die Grundlagen der japanischen Teezeremonie und die richtige Zubereitung mit Chasen und Chawan.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🌿</div>
+        <h3>Sanfte Energie</h3>
+        <p>Natürliches Koffein kombiniert mit L-Theanin für einen ruhigen, konzentrierten Energieschub.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="benefit-icon">🍰</div>
+        <h3>Kreative Rezepte</h3>
+        <p>Von Matcha-Latte über Baked Goods bis Eis – für jede Tageszeit das passende Rezept.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="rezepte" class="recipes">
+  <div class="container">
+    <div class="section-title">
+      <span class="eyebrow">Beliebte Rezepte</span>
+      <h2>Drei Matcha-Favoriten zum Nachmachen</h2>
+      <p>Ein kleiner Vorgeschmack auf das, was dich in unserer vollständigen Sammlung erwartet.</p>
+    </div>
+    <div class="recipes-grid">
+      <div class="recipe-card">
+        <div class="recipe-thumb">🍵</div>
+        <div class="recipe-body">
+          <span class="recipe-tag">Klassiker</span>
+          <h3>Usucha – Dünner Matcha</h3>
+          <p>Die traditionelle Art, Matcha zuzubereiten: cremig aufgeschlagen mit dem Bambusbesen Chasen.</p>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <div class="recipe-thumb">🥛</div>
+        <div class="recipe-body">
+          <span class="recipe-tag">Modern</span>
+          <h3>Matcha Latte Deluxe</h3>
+          <p>Cremige Hafermilch trifft auf feinen Matcha – perfekt für einen ruhigen Morgen.</p>
+        </div>
+      </div>
+      <div class="recipe-card">
+        <div class="recipe-thumb">🍨</div>
+        <div class="recipe-body">
+          <span class="recipe-tag">Dessert</span>
+          <h3>Matcha Eis ohne Eismaschine</h3>
+          <p>Cremiges Matcha-Eis mit nur vier Zutaten – erfrischend und einfach gemacht.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="anmelden" class="lead-section">
+  <div class="container lead-inner">
+    <div>
+      <span class="eyebrow" style="background: rgba(255,255,255,0.15); color:#fff;">Kostenloser Zugang</span>
+      <h2>Erhalte unsere besten Matcha-Rezepte direkt ins Postfach</h2>
+      <p>Trage dich ein und bekomme regelmäßig neue japanische Matcha-Rezepte, Zubereitungstipps und Wissenswertes rund um Matcha.</p>
+      <p>Kein Spam – jederzeit abbestellbar.</p>
+    </div>
+
+    <form class="lead-form" id="lead-form" novalidate>
+      <div class="form-group">
+        <label for="vorname">Vorname</label>
+        <input type="text" id="vorname" name="vorname" placeholder="Dein Vorname" required autocomplete="given-name">
+      </div>
+      <div class="form-group">
+        <label for="email">E-Mail-Adresse</label>
+        <input type="email" id="email" name="email" placeholder="du@beispiel.de" required autocomplete="email">
+      </div>
+      <button type="submit" class="btn btn-primary" id="lead-submit">Rezepte kostenlos erhalten</button>
+      <div class="form-message" id="form-message"></div>
+      <p class="form-note">Mit dem Absenden stimmst du zu, gelegentlich E-Mails von uns zu erhalten.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="logo"><span class="logo-dot"></span> Matcha Momente</div>
+    <p>&copy; <span id="year"></span> Matcha Momente. Alle Rechte vorbehalten.</p>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const form = document.getElementById('lead-form');
+  const submitBtn = document.getElementById('lead-submit');
+  const messageBox = document.getElementById('form-message');
+
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    messageBox.className = 'form-message';
+    messageBox.textContent = '';
+
+    const vorname = document.getElementById('vorname').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    if (!vorname || !email) {
+      messageBox.textContent = 'Bitte fülle Vorname und E-Mail aus.';
+      messageBox.className = 'form-message error';
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Wird gesendet …';
+
+    try {
+      const response = await fetch('/api/lead', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ vorname, email })
+      });
+
+      if (!response.ok) {
+        throw new Error('Serverfehler: ' + response.status);
+      }
+
+      messageBox.textContent = 'Danke, ' + vorname + '! Schau in dein Postfach für deine ersten Matcha-Rezepte.';
+      messageBox.className = 'form-message success';
+      form.reset();
+    } catch (err) {
+      messageBox.textContent = 'Da ist etwas schiefgelaufen. Bitte versuche es später erneut.';
+      messageBox.className = 'form-message error';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Rezepte kostenlos erhalten';
+    }
+  });
+</script>
+
+</body>
+</html>
